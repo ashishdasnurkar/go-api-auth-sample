@@ -7,6 +7,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
+type User struct {
+	ID       int    `json:"id"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
