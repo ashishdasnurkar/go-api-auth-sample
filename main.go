@@ -13,6 +13,14 @@ type User struct {
 	Password string `json:"password"`
 }
 
+type JWT struct {
+	Token string `json:"token"`
+}
+
+type Error struct {
+	Message string 'json:"message"'
+}
+
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
