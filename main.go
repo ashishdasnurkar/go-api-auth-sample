@@ -18,7 +18,7 @@ type JWT struct {
 }
 
 type Error struct {
-	Message string 'json:"message"'
+	Message string `json:"message"`
 }
 
 func main() {
