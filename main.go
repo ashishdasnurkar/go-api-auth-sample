@@ -1,7 +1,9 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -19,6 +21,14 @@ type JWT struct {
 
 type Error struct {
 	Message string `json:"message"`
+}
+
+var db *sql.DB
+
+func logFatal(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
