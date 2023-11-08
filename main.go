@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
+	"github.com/eaigner/jet"
 	"github.com/gorilla/mux"
+	"github.com/lib/pq"
 )
 
 type User struct {
@@ -32,6 +35,11 @@ func logFatal(err error) {
 }
 
 func main() {
+	pgUrl, err := pq.ParseURL(os.Getenv("ELEPHANTSQL_UR¨"))
+	logFatal(err)
+	db, err := jet.Open("postgres", pgUrl)
+	logFatal(err)
+
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/signup", signup).Methods("POST")
