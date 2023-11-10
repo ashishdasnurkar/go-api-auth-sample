@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -35,9 +36,10 @@ func logFatal(err error) {
 }
 
 func main() {
-	pgUrl, err := pq.ParseURL(os.Getenv("ELEPHANTSQL_UR¨"))
+	pgUrl, err := pq.ParseURL(os.Getenv("ELEPHANT_SQL"))
 	logFatal(err)
 	db, err := jet.Open("postgres", pgUrl)
+	db.Ping()
 	logFatal(err)
 
 	r := mux.NewRouter()
@@ -49,7 +51,9 @@ func main() {
 }
 
 func signup(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Singup invoked")
+	var user User
+	json.NewDecoder(r.Body).Decode(&user)
+	fmt.Printf("Singup invoked with %+v", user)
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
