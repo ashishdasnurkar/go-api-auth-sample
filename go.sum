@@ -1,3 +1,5 @@
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/eaigner/jet v0.0.0-20140105131908-ae59b2cccfe3 h1:dOZHh7hVmgid84dAUqqJFCeZipgQS+j2jAgGoUJOxpE=
 github.com/eaigner/jet v0.0.0-20140105131908-ae59b2cccfe3/go.mod h1:dDZTQm1VvYk0PrMlFHIhNE+6WPbmDv4EO8Qt96ix3Q4=
 github.com/golang-jwt/jwt/v5 v5.0.0 h1:1n1XNM9hk7O9mnQoNBGolZvzebBQ7p93ULHRc28XJUE=

@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/eaigner/jet"
 	"github.com/gorilla/mux"
 	"github.com/lib/pq"
@@ -53,7 +54,7 @@ func main() {
 func signup(w http.ResponseWriter, r *http.Request) {
 	var user User
 	json.NewDecoder(r.Body).Decode(&user)
-	fmt.Printf("Singup invoked with %+v", user)
+	spew.Dump(user)
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
