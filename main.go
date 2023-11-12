@@ -52,6 +52,11 @@ func main() {
 	http.ListenAndServe(":8080", r)
 }
 
+func sendError(w http.ResponseWriter, status int, error Error) {
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(error)
+}
+
 func signup(w http.ResponseWriter, r *http.Request) {
 	var user User
 	var error Error
@@ -59,14 +64,12 @@ func signup(w http.ResponseWriter, r *http.Request) {
 	spew.Dump(user)
 	if strings.TrimSpace(user.Email) == "" {
 		error.Message = "Email is missing."
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(error)
+		sendError(w, http.StatusBadRequest, error)
 		return
 	}
 	if strings.TrimSpace(user.Password) == "" {
 		error.Message = "Password is missing."
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(error)
+		sendError(w, http.StatusBadRequest, error)
 		return
 	}
 }
