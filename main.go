@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/eaigner/jet"
@@ -53,8 +54,21 @@ func main() {
 
 func signup(w http.ResponseWriter, r *http.Request) {
 	var user User
+	var error Error
 	json.NewDecoder(r.Body).Decode(&user)
 	spew.Dump(user)
+	if strings.TrimSpace(user.Email) == "" {
+		error.Message = "Email is missing."
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(error)
+		return
+	}
+	if strings.TrimSpace(user.Password) == "" {
+		error.Message = "Password is missing."
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(error)
+		return
+	}
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
