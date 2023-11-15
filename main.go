@@ -13,6 +13,7 @@ import (
 	"github.com/eaigner/jet"
 	"github.com/gorilla/mux"
 	"github.com/lib/pq"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
@@ -72,6 +73,12 @@ func signup(w http.ResponseWriter, r *http.Request) {
 		sendError(w, http.StatusBadRequest, error)
 		return
 	}
+	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
+	if err != nil {
+		logFatal(err)
+	}
+	fmt.Printf("Pass plain text:%s\n", user.Password)
+	fmt.Printf("Hash:%s", hash)
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
